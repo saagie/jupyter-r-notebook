@@ -42,4 +42,8 @@ RUN echo 'install.packages(c("dplyr","shiny","foreach","microbenchmark","paralle
 RUN echo 'IRkernel::installspec()' > /tmp/temp.R && Rscript /tmp/temp.R
 
 #Run the notebook
-CMD jupyter notebook
+CMD jupyter notebook \
+    --ip=* \
+    --MappingKernelManager.time_to_dead=10 \
+    --MappingKernelManager.first_beat=3 \
+    --notebook-dir=/notebooks-dir/
