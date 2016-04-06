@@ -1,4 +1,4 @@
-FROM saagie/jupyter-notebook
+FROM jupyter/notebook
 
 MAINTAINER Saagie
 
