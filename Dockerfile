@@ -1,4 +1,4 @@
-FROM jupyter/notebook
+FROM saagie/jupyter-notebook
 
 MAINTAINER Saagie
 
@@ -19,14 +19,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends openjdk-7-jdk &
 RUN R CMD javareconf
 RUN echo 'install.packages(c("rJava"),repos="http://cran.us.r-project.org", dependencies=TRUE)' > /tmp/packages.R && Rscript /tmp/packages.R
 
+# Impala Jars
+RUN mkdir /usr/lib/impala && mkdir /usr/lib/impala/lib && cd /usr/lib/impala/lib && \
+curl -O https://downloads.cloudera.com/impala-jdbc/impala-jdbc-0.5-2.zip && unzip -j impala-jdbc-0.5-2.zip && rm impala-jdbc-0.5-2.zip
+
 # Utilities for R Jupyter Kernel
 RUN echo 'install.packages(c("base64enc","evaluate","IRdisplay","jsonlite","uuid","digest"), \
 repos="http://cran.us.r-project.org", dependencies=TRUE)' > /tmp/packages.R \
    && Rscript /tmp/packages.R
 
+RUN apt-get update && apt-get install -y --no-install-recommends libzmq3-dev && apt-get clean
+
 # Install R Jupyter Kernel
 RUN echo 'install.packages(c("rzmq","repr","IRkernel"),repos = c("http://irkernel.github.io/", dependencies=TRUE))'> /tmp/packages.R \
     && Rscript /tmp/packages.R
+
 
 # Database Libraries
 RUN echo 'install.packages(c("RODBC","elastic","mongolite","rmongobd","RMySQL","RPostgreSQL","RJDBC","rredis","RCassandra","RHive","RNeo4j","RImpala"),repos="http://cran.us.r-project.org", dependencies=TRUE)' > /tmp/packages.R && Rscript /tmp/packages.R
@@ -35,8 +42,7 @@ RUN echo 'install.packages(c("RODBC","elastic","mongolite","rmongobd","RMySQL","
 RUN echo 'install.packages("https://github.com/RevolutionAnalytics/rhdfs/blob/master/build/rhdfs_1.0.8.tar.gz?raw=true", repos = NULL, type = "source")' > /tmp/packages.R && Rscript /tmp/packages.R
 
 # Machine Learning Libraries
-RUN echo 'install.packages(c("dplyr","shiny","foreach","microbenchmark","parallel","runit","arules","arulesSequences","neuralnet","RSNNS","AUC","sprint","recommenderlab","acepack","addinexamples","clv","cubature","dtw","Formula","git2r","googleVis","gridExtra","gsubfn","hash","Hmisc","ifultools","latticeExtra","locpol","longitudinalData","lubridate","miniUI","misc3d","mvtsplot","np","openssl","packrat","pdc","PKI","rsconnect","splus2R","sqldf","TaoTeProgramming","TraMineR","TSclust","withr","wmtsa"), repos="http://cran.us.r-project.org", dependencies=TRUE)' > /tmp/packages.R \
-   && Rscript /tmp/packages.R
+RUN echo 'install.packages(c("dplyr","shiny","foreach","microbenchmark","parallel","runit","arules","arulesSequences","neuralnet","RSNNS","AUC","sprint","recommenderlab","acepack","addinexamples","clv","cubature","dtw","Formula","git2r","googleVis","gridExtra","gsubfn","hash","Hmisc","ifultools","latticeExtra","locpol","longitudinalData","lubridate","miniUI","misc3d","mvtsplot","np","openssl","packrat","pdc","PKI","rsconnect","splus2R","sqldf","TaoTeProgramming","TraMineR","TSclust","withr","wmtsa"), repos="http://cran.us.r-project.org", dependencies=TRUE)' > /tmp/packages.R && Rscript /tmp/packages.R
 
 # Install R kernel
 RUN echo 'IRkernel::installspec()' > /tmp/temp.R && Rscript /tmp/temp.R
