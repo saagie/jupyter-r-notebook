@@ -1,8 +1,8 @@
 # Jupyter Datascience Notebook for R
 
-Run with a volume to spark home in /opt/spark
 
-docker run -p 8888:8888 -v /opt/spark/current:/opt/spark saagie/r-notebook:latest
+## Run with :
+	* docker run -p 8888:8888 -v /opt/spark/current:/opt/spark saagie/r-notebook:latest
 
 ## Libraries :
 
@@ -75,5 +75,18 @@ docker run -p 8888:8888 -v /opt/spark/current:/opt/spark saagie/r-notebook:lates
 		* rsconnect
 		* splus2R
 		* withr
-	
-  
+
+## Install libraries with :
+	* install.packages("libraryName", repos="http://cran.us.r-project.org", dependencies=TRUE)
+
+
+
+
+
+
+
+
+
+
+
+
