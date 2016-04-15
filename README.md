@@ -1,8 +1,7 @@
 # Jupyter Datascience Notebook for R
 
-
 ## Run with :
-	* docker run -p 8888:8888 -v /opt/spark/current:/opt/spark saagie/r-notebook:latest
+	docker run -p 8888:8888 -v /path/to/data/notebooks/dir:/notebooks-dir saagie/r-notebook:latest
 
 ## Libraries :
 
@@ -77,7 +76,7 @@
 		* withr
 
 ## Install libraries with :
-	* install.packages("libraryName", repos="http://cran.us.r-project.org", dependencies=TRUE)
+	install.packages("libraryName", repos="http://cran.us.r-project.org", dependencies=TRUE)
 
 
 
