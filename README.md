@@ -1,7 +1,7 @@
 # Jupyter Datascience Notebook for R
 
 ## Run with :
-	docker run -p 8888:8888 -v /path/to/data/notebooks/dir:/notebooks-dir saagie/jupyter-r-notebook:latest
+	docker run -p 8888:8888 -v /path/to/data/notebooks/dir:/home/jovyan saagie/jupyter-r-notebook:latest
 
 ## Libraries :
 
@@ -44,13 +44,11 @@
 		* RODBC
 		* elastic
 		* mongolite
-		* rmongodb
 		* RMySQL
 		* RPostgreSQL
 		* RJDBC
 		* rredis
 		* RCassandra
-		* RHive
 		* RNeo4j
 
 	* Utils
@@ -58,8 +56,6 @@
 		* foreach
 		* microbenchmark
 		* runit
-		* sprint
-		* addinexamples
 		* Formula
 		* git2r
 		* gsubfn
@@ -77,15 +73,3 @@
 
 ## Install libraries with :
 	install.packages("libraryName", repos="http://cran.us.r-project.org", dependencies=TRUE)
-
-
-
-
-
-
-
-
-
-
-
-
