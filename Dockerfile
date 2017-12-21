@@ -45,6 +45,12 @@ RUN echo 'install.packages(c("microbenchmark", "runit", "arules", "arulesSequenc
 # Clean
 RUN rm -f /tmp/packages.R
 
+# Create default workdir (useful if no volume mounted)
+USER root
+RUN mkdir /notebooks-dir && chown 1000:100 /notebooks-dir
+USER $NB_USER
+
+# Define default workdir
 WORKDIR /notebooks-dir
 
 # Default: run without authentication
