@@ -45,5 +45,7 @@ RUN echo 'install.packages(c("microbenchmark", "runit", "arules", "arulesSequenc
 # Clean
 RUN rm -f /tmp/packages.R
 
+WORKDIR /notebooks-dir
+
 # Default: run without authentication
 CMD ["start-notebook.sh", "--NotebookApp.token=''"]
